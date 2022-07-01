@@ -1,0 +1,85 @@
+@import '../../assets/scss/utilities/variables';
+.c-activityBox{
+  display: flex;
+  overflow: hidden;
+  height: 596px;
+  color: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 rgba(43, 43, 43, .1);
+  &__main{
+    display: inline-flex;
+    background-color: #275E9D;
+  }
+  &__product{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $white;
+  }
+  &__info{
+    display: inline-flex;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 24px 32px 0;
+    height: 510px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  &__item{
+    margin-bottom: 16px;
+  }
+  &__page{
+    padding: 12px 0;
+    height: 60px;
+    border-top: 1px solid #f2f2f2;
+  }
+}
+.c-activity{
+  position: relative;
+  display: flex;
+  width: 600px;
+  &__tag{
+    position: absolute;
+    top: 16px;
+    left: 8px;
+  }
+  &__title{
+    position: absolute;
+    top: 64px;
+    left: 24px;
+    overflow: hidden;
+    width: 274px;
+    font-size: 36px;
+    font-family: 'Noto Sans TC';
+    font-weight: 700;
+  }
+  &__info{
+    display: flex;
+    padding: 48px 24px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  &__hashtag{
+    display: flex;
+    align-items: flex-end;
+  }
+  &__theme{
+    overflow: hidden;
+    width: 360px;
+    height: 100%;
+    border-radius:64px 0 0;
+  }
+}
+.o-hashtag{
+  font-size: 16px;
+  font-weight: 500;
+  &__item{
+    display: inline-flex;
+    margin: 8px 4px;
+    border-radius: 100px;
+    background:rgba($white, .2);
+  }
+  &__tag{
+    padding: 2px 12px;
+  }
+}
