@@ -46,13 +46,13 @@ module.exports = {
     'number-leading-zero': 'never',
     // [css-層級]
     'selector-max-compound-selectors': 10,
-    'rule-empty-line-before': 'rule-empty-line-before',
+    'rule-empty-line-before': 'never-multi-line',
 
     // [符號類]
     // 空格
     'block-no-empty': [true, { ignore: ['comments'] }],
     // 關閉大括號後面的空白
-    'block-closing-brace-empty-line-before': 'rule-empty-line-before',
+    'block-closing-brace-empty-line-before': 'never',
     // 分號前後
     'declaration-block-semicolon-space-after': 'never-single-line',
     'declaration-block-semicolon-space-before': 'never-single-line',
