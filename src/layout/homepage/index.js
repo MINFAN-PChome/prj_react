@@ -7,6 +7,9 @@ const Homepage = () => {
   const [themData, setThemData] = useState([]);
   const [hastTagData, setHastTagData] = useState([]);
   const [prodData, setProdData] = useState([]);
+  const newHastTagData = [];
+  const newProdData = [];
+
   activityData.forEach((item, index) => {
     if (item.Id === 1) {
       themData.push({
@@ -17,7 +20,7 @@ const Homepage = () => {
         themImg: item.Img.Src,
         themAlt: item.Img.Text,
       });
-      // setThemData(...item, themData);
+      // setThemData(themData);
     }
     if (item.Id >= 2 && item.Id <= 6) {
       hastTagData.push({
@@ -26,7 +29,8 @@ const Homepage = () => {
         tagLink: item.Link.Url,
         tagType: item.ExtraData.ElementType,
       });
-      // setHastTagData(...item);
+
+      // setHastTagData(hastTagData);
     }
     if (item.Id >= 7) {
       prodData.push({
@@ -38,16 +42,16 @@ const Homepage = () => {
         prodType: item.ExtraData.ElementType,
         prodTypeSort: item.ExtraData.Sort,
       });
-      // setProdData(...item);
+      // setProdData(prodData);
     }
   });
 
   useEffect(() => {
     // api refactored data
-  }, []);
-  console.log(themData);
-  console.log(hastTagData);
-  console.log(prodData);
+  }, [activityData]);
+  // console.log(themData);
+  // console.log(hastTagData);
+  // console.log(prodData);
 
   return (
     <main className='l-main'>

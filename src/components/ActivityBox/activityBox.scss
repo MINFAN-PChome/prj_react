@@ -16,18 +16,19 @@
     background: $white;
   }
   &__info{
-    display: inline-flex;
+    display: flex;
     justify-content: space-between;
     overflow: hidden;
     padding: 24px 32px 0;
-    height: 510px;
-    flex-direction: row;
-    flex-wrap: wrap;
+    height: 534px;
   }
   &__item{
     margin-bottom: 16px;
   }
   &__page{
+    display: flex;
+    justify-content: center;
+    align-content: center;
     padding: 12px 0;
     height: 60px;
     border-top: 1px solid #f2f2f2;
@@ -45,7 +46,12 @@
   &__tag{
     position: absolute;
     top: 16px;
-    left: 8px;
+    left: 0;
+    box-shadow: 0 4px 0 rgba(43, 43, 43, .1);
+    &::after{
+      content: '';
+      // background: url('../');
+    }
   }
   &__title{
     position: absolute;
@@ -78,6 +84,25 @@
       object-fit: cover;}
   }
 }
+.o-tag{
+  padding: 12px 0 12px 8px;
+  font-family: 'Noto Sans TC';
+  background: $secondary;
+  text-shadow: 0 2px 0 rgba(43, 43, 43, .15);
+  font-style: italic;
+}
+.o-page{
+  display: inline-flex;
+  align-items: center;
+  &__pagination{
+    padding: 0 16px;
+    color: $primary;
+    font-size:18px;
+    /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+    font-family: Montserrat;
+    font-style: italic;
+  }
+}
 .o-hashtag{
   margin: 0 -4px;
   font-size: 16px;
@@ -91,6 +116,5 @@
   &__tag{
     padding: 2px 12px;
     color: $white;
-    text-decoration: none;
   }
 }

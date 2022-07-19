@@ -1,41 +1,31 @@
 import React from 'react';
 import ProductInfo from '../ProductInfo';
+import Button from '../Button';
+import Icon from '../Icon';
 import './activityBox.scss';
 
-// function Hashtag(props) {
-//   const { value } = props;
-//   return (
-//     <li className='o-hashtag__item'>
-//       <span className='o-hashtag__tag'>{value}</span>
-//     </li>
-//   );
-// }
+const renderElementTypeUrl = (type) => {
+  switch (type) {
+    case 'Store':
+      return 'https://24h.pchome.com.tw/store/';
+    case 'Prod':
+      return 'https://24h.pchome.com.tw/prod/';
+    case 'Search':
+      return 'https://ecshweb.pchome.com.tw/search/v3.3/?q=';
 
-function ProductItem(props) {
-  return <></>;
-}
+    default:
+      return '';
+  }
+};
 
-// const renderElementTypeUrl = (type) => {
-//   switch (type) {
-//     case 'Store':
-//       return 'https://24h.pchome.com.tw/store/';
-//     case 'Prod':
-//       return 'https://24h.pchome.com.tw/prod/';
-//     case 'Search':
-//       return 'https://ecshweb.pchome.com.tw/search/v3.3/?q=';
-
-//     default:
-//       return '';
-//   }
-// };
-// {
-//   type === 'Url' ? 'url' : renderElementTypeUrl(type);
-// }
+const renderPage = (props) => {
+  const { prodData } = props;
+  const pageStemp = 6;
+  const pageAverage = Math.ceil(prodData / pageStemp);
+};
 
 const ActivityBox = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { themData, hastTagData, prodData } = props;
-  // console.log(themData);
   const renderActivity = () => {
     const activity = themData.map(({ id, themName, themBackgroundColor, themImg, themAlt }) => {
       return (
@@ -45,7 +35,9 @@ const ActivityBox = (props) => {
             style={{ backgroundColor: `${themBackgroundColor}` }}
           >
             <div className='c-activity__info'>
-              <div className='c-activity__tag'>{/* <div className='o-tag'>{tag}</div> */}</div>
+              <div className='c-activity__tag'>
+                <div className='o-tag'>主題推薦</div>
+              </div>
               {<div className='c-activity__title'>{themName}</div>}
               <div className='c-activity__hashtag'>
                 <ul className='o-hashtag'>{renderHastTag()}</ul>
@@ -65,7 +57,10 @@ const ActivityBox = (props) => {
       const { id, tagName, tagLink, tagType } = tag;
       return (
         <li className='o-hashtag__item' key={id}>
-          <a href={tagLink} className='o-hashtag__tag'>
+          <a
+            href={`${tagType === '' ? 'prodType' : renderElementTypeUrl(tagType)}` + tagLink}
+            className='o-hashtag__tag'
+          >
             #{tagName}
           </a>
         </li>
@@ -94,26 +89,29 @@ const ActivityBox = (props) => {
       <div className='c-activityBox__main'>{renderActivity()}</div>
       <div className='c-activityBox__product'>
         <div className='c-activityBox__info'>
-          <ul className='c-activityBox__info'>
-            {prodData.map((id, prodName, prodPrice, prodLink, prodImg) => {
-              <ProductInfo
-                key={id}
-                prodName={prodName}
-                prodPrice={prodPrice}
-                prodLink={prodLink}
-                prodImg={prodImg}
-              />;
-            })}
-          </ul>
+          <div className='c-activityBox__wrapper'>
+            <div className='c-activityBox__slide'>
+              <ul className='c-activityBox__productBox'>
+                <ProductInfo prodData={prodData} renderElementTypeUrl={renderElementTypeUrl} />
+              </ul>
+            </div>
+          </div>
         </div>
         <div className='c-activityBox__page'>
           <div className='o-page'>
             <div className='o-page__btn'>
-              <div className='o-btn--prev'></div>
+              <Button
+                style='o-btn o-btn--circle o-btn--prev'
+                startIcon={<Icon style='o-icon o-icon--prev' />}
+              ></Button>
             </div>
-            <div className='o-page__pagination'></div>
+            <div className='o-page__pagination'>1/3</div>
             <div className='o-page__btn'>
-              <div className='o-btn--next'></div>
+              <Button
+                style='o-btn o-btn--circle o-btn--next'
+                startIcon={<Icon style='o-icon o-icon--next' />}
+              ></Button>
+              ;
             </div>
           </div>
         </div>

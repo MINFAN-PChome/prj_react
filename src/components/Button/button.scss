@@ -1,0 +1,31 @@
+@import '../../assets/scss/utilities/variables';
+button{
+  outline: none;
+  cursor: pointer;
+}
+.o-btn{
+  background: $white;
+  & .is-disabled{
+    border-color: $gray-200;
+  }
+  &--circle{
+    width: 36px;
+    height: 36px;
+    border: 1px solid transparent;
+    border-radius: 100%;
+    transition: all .35s;
+  }
+  &--circle{
+
+  }
+  &--prev,&--next{
+    border-color: $gray-200;
+    // background: url('./images/icons/icon-arrow.svg') no-repeat;
+    &:hover{
+      width: 40px;
+      height: 40px;
+      border-color: $primary;
+      box-shadow: 0 2px 16px rgba($primary, .1);
+    }
+  }
+}

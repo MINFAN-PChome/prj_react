@@ -1,2 +1,6 @@
-body{font-size: 100%;line-height: 1.5;background: #F2F2F2;}
+*{font-size: 100%;line-height: 1.5;box-sizing: border-box;}
+body{background: #F2F2F2;}
 .l-container{margin: auto;max-width: 1240px;}
+a{
+  text-decoration: none;
+}
