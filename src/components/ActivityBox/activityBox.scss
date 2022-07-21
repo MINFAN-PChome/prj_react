@@ -53,6 +53,13 @@
       // background: url('../');
     }
   }
+  &__tagEdit{
+    padding: 12px 0 12px 8px;
+    font-family: 'Noto Sans TC';
+    background: $secondary;
+    text-shadow: 0 2px 0 rgba(43, 43, 43, .15);
+    font-style: italic;
+  }
   &__title{
     position: absolute;
     top: 64px;
@@ -69,10 +76,27 @@
     font-size: 16px;
     font-weight: 500;
   }
-  &__hashtag{
+  &__hashtagBox{
     display: inline-flex;
     align-items: flex-end;
     width: 240px;
+  }
+  &__hashtag{
+    margin: 0 -4px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  &__hashtag &{
+    &__item{
+      display: inline-flex;
+      margin: 8px 4px;
+      border-radius: 100px;
+      background:rgba($white, .2);
+    }
+    &__link{
+      padding: 2px 12px;
+      color: $white;
+    }
   }
   &__theme{
     overflow: hidden;
@@ -83,13 +107,6 @@
       height: 100%;
       object-fit: cover;}
   }
-}
-.o-tag{
-  padding: 12px 0 12px 8px;
-  font-family: 'Noto Sans TC';
-  background: $secondary;
-  text-shadow: 0 2px 0 rgba(43, 43, 43, .15);
-  font-style: italic;
 }
 .o-page{
   display: inline-flex;
@@ -103,18 +120,4 @@
     font-style: italic;
   }
 }
-.o-hashtag{
-  margin: 0 -4px;
-  font-size: 16px;
-  font-weight: 500;
-  &__item{
-    display: inline-flex;
-    margin: 8px 4px;
-    border-radius: 100px;
-    background:rgba($white, .2);
-  }
-  &__tag{
-    padding: 2px 12px;
-    color: $white;
-  }
-}
+

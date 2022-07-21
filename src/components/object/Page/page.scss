@@ -1,0 +1,13 @@
+@import '../../../assets/scss/utilities/variables';
+.o-page{
+  display: inline-flex;
+  align-items: center;
+  &__pagination{
+    padding: 0 16px;
+    color: $primary;
+    font-size:18px;
+    /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+    font-family: Montserrat;
+    font-style: italic;
+  }
+}

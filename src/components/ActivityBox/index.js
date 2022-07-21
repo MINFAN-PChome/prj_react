@@ -1,7 +1,6 @@
 import React from 'react';
 import ProductInfo from '../ProductInfo';
-import Button from '../Button';
-import Icon from '../Icon';
+import Page from '../object/Page';
 import './activityBox.scss';
 
 const renderElementTypeUrl = (type) => {
@@ -17,49 +16,46 @@ const renderElementTypeUrl = (type) => {
       return '';
   }
 };
-
-// const renderPage = (props) => {
-//   const { prodData } = props;
-//   const pageStemp = 6;
-//   const pageAverage = Math.ceil(prodData / pageStemp);
-// };
+const activityTag = '主題推薦';
 
 const ActivityBox = (props) => {
   const { themData, hastTagData, prodData } = props;
   const renderActivity = () => {
-    const activity = themData.map(({ themId, themName, themBackgroundColor, themImg, themAlt }) => {
-      return (
-        <div className='c-activity' key={themId}>
-          <div
-            className='c-activity__editThem'
-            style={{ backgroundColor: `${themBackgroundColor}` }}
-          >
-            <div className='c-activity__info'>
-              <div className='c-activity__tag'>
-                <div className='o-tag'>主題推薦</div>
+    const activity = themData.map(
+      ({ themId, themName, themBackgroundColor, themImg, themAlt }, index) => {
+        return (
+          <div className='c-activity' key={index}>
+            <div
+              className='c-activity__editThem'
+              style={{ backgroundColor: `${themBackgroundColor}` }}
+            >
+              <div className='c-activity__info'>
+                <div className='c-activity__tag'>
+                  <div className='c-activity__tagEdit'>{activityTag}</div>
+                </div>
+                {<div className='c-activity__title'>{themName}</div>}
+                <div className='c-activity__hashtagBox'>
+                  <ul className='c-activity__hashtag'>{renderHastTag()}</ul>
+                </div>
               </div>
-              {<div className='c-activity__title'>{themName}</div>}
-              <div className='c-activity__hashtag'>
-                <ul className='o-hashtag'>{renderHastTag()}</ul>
+              <div className='c-activity__theme'>
+                <img src={themImg} alt={themAlt} />
               </div>
-            </div>
-            <div className='c-activity__theme'>
-              <img src={themImg} alt={themAlt} />
             </div>
           </div>
-        </div>
-      );
-    });
+        );
+      }
+    );
     return activity;
   };
   const renderHastTag = () => {
-    const hashTag = hastTagData.map((tag) => {
+    const hashTag = hastTagData.map((tag, index) => {
       const { tagId, tagName, tagLink, tagType } = tag;
       return (
-        <li className='o-hashtag__item' key={tagId}>
+        <li className='c-activity__item' key={index}>
           <a
             href={`${tagType === '' ? 'prodType' : renderElementTypeUrl(tagType)}` + tagLink}
-            className='o-hashtag__tag'
+            className='c-activity__link'
           >
             #{tagName}
           </a>
@@ -98,22 +94,7 @@ const ActivityBox = (props) => {
           </div>
         </div>
         <div className='c-activityBox__page'>
-          <div className='o-page'>
-            <div className='o-page__btn'>
-              <Button
-                style='o-btn o-btn--circle o-btn--prev'
-                startIcon={<Icon style='o-icon o-icon--prev' />}
-              ></Button>
-            </div>
-            <div className='o-page__pagination'>1/3</div>
-            <div className='o-page__btn'>
-              <Button
-                style='o-btn o-btn--circle o-btn--next'
-                startIcon={<Icon style='o-icon o-icon--next' />}
-              ></Button>
-              ;
-            </div>
-          </div>
+          <Page />
         </div>
       </div>
     </div>

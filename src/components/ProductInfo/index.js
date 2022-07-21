@@ -8,7 +8,7 @@ const ProductInfo = (props) => {
     const { prodId, prodName, prodPrice, prodLink, prodImg, prodType, prodTypeSort } = item;
     console.log();
     return (
-      <li className='c-activityBox__item' key={prodId}>
+      <li className='c-activityBox__item' key={index}>
         <a
           className='c-activityBox__link'
           href={`${prodType === '' ? 'prodType' : renderElementTypeUrl(prodType)}` + prodLink}
