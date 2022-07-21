@@ -5,10 +5,10 @@ const ProductInfo = (props) => {
   const { prodData, renderElementTypeUrl } = props;
 
   return prodData.map((item, index) => {
-    const { id, prodName, prodPrice, prodLink, prodImg, prodType, prodTypeSort } = item;
+    const { prodId, prodName, prodPrice, prodLink, prodImg, prodType, prodTypeSort } = item;
     console.log();
     return (
-      <li className='c-activityBox__item' key={id}>
+      <li className='c-activityBox__item' key={prodId}>
         <a
           className='c-activityBox__link'
           href={`${prodType === '' ? 'prodType' : renderElementTypeUrl(prodType)}` + prodLink}

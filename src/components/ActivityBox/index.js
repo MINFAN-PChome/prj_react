@@ -18,18 +18,18 @@ const renderElementTypeUrl = (type) => {
   }
 };
 
-const renderPage = (props) => {
-  const { prodData } = props;
-  const pageStemp = 6;
-  const pageAverage = Math.ceil(prodData / pageStemp);
-};
+// const renderPage = (props) => {
+//   const { prodData } = props;
+//   const pageStemp = 6;
+//   const pageAverage = Math.ceil(prodData / pageStemp);
+// };
 
 const ActivityBox = (props) => {
   const { themData, hastTagData, prodData } = props;
   const renderActivity = () => {
-    const activity = themData.map(({ id, themName, themBackgroundColor, themImg, themAlt }) => {
+    const activity = themData.map(({ themId, themName, themBackgroundColor, themImg, themAlt }) => {
       return (
-        <div className='c-activity' key={id}>
+        <div className='c-activity' key={themId}>
           <div
             className='c-activity__editThem'
             style={{ backgroundColor: `${themBackgroundColor}` }}
@@ -54,9 +54,9 @@ const ActivityBox = (props) => {
   };
   const renderHastTag = () => {
     const hashTag = hastTagData.map((tag) => {
-      const { id, tagName, tagLink, tagType } = tag;
+      const { tagId, tagName, tagLink, tagType } = tag;
       return (
-        <li className='o-hashtag__item' key={id}>
+        <li className='o-hashtag__item' key={tagId}>
           <a
             href={`${tagType === '' ? 'prodType' : renderElementTypeUrl(tagType)}` + tagLink}
             className='o-hashtag__tag'

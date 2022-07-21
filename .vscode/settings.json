@@ -1,11 +1,8 @@
 {
   "editor.formatOnSave": true,
-<<<<<<< Updated upstream
-  "editor.formatOnPaste": true
-=======
   "editor.formatOnPaste": true,
-  "prettier.semi": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
-  "typescript.format.insertSpaceAfterSemicolonInForStatements": true
->>>>>>> Stashed changes
+  "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
+  "prettier.semi": false
 }
