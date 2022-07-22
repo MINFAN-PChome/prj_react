@@ -6,7 +6,6 @@ const ProductInfo = (props) => {
 
   return prodData.map((item, index) => {
     const { prodId, prodName, prodPrice, prodLink, prodImg, prodType, prodTypeSort } = item;
-    console.log();
     return (
       <li className='c-activityBox__item' key={index}>
         <a
@@ -15,7 +14,7 @@ const ProductInfo = (props) => {
         >
           <div className='c-productInfo'>
             <div className='c-productInfo__img'>
-              <img src={'https://cs-a.ecimg.tw' + prodImg} alt={prodName} />
+              <img src={'https://cs-a.ecimg.tw' + `${prodImg}`} alt={prodName} />
             </div>
             <div className='c-productInfo__title'>{prodName}</div>
             <div className='c-productInfo__price'>${prodPrice}</div>

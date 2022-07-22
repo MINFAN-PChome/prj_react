@@ -9,7 +9,7 @@ const config = {
   entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
   },
   entry: ['react-hot-loader/patch', './src'],
   module: {
@@ -34,29 +34,38 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [
+                path.resolve(__dirname, './src/assets/scss/utils/_variables.scss'),
+                path.resolve(__dirname, './src/assets/scss/utils/_mixins.scss'),
+              ],
+            },
+          },
+        ],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            name: 'assets/fonts',
-          },
-        },
+        loader: 'url-loader',
       },
       {
         test: /\.svg$/,
-        use: 'file-loader',
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
       },
       {
         test: /\.png|.svg$/,
         use: [
           {
             loader: 'url-loader',
-            options: {
-              mimetype: 'image/png',
-            },
           },
         ],
       },
@@ -79,10 +88,7 @@ const config = {
       patterns: [{ from: 'src/index.html', to: 'assets/images', noErrorOnMissing: true }],
     }),
     new HtmlWebpackPlugin({
-      templateContent: ({ htmlWebpackPlugin }) =>
-        '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' +
-        htmlWebpackPlugin.options.title +
-        '</title></head><body><div id="app"></div></body></html>',
+      template: './public/index.html',
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin(),
@@ -105,7 +111,7 @@ const config = {
 module.exports = (env, argv) => {
   if (argv.hot) {
     // Cannot use 'contenthash' when hot reloading is enabled.
-    config.output.filename = '[name].[hash].js';
+    config.output.filename = '[name].js';
   }
 
   return config;

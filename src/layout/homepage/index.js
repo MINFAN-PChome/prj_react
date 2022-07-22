@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../assets/scss/all.scss';
+
 import { activityData } from '../../config';
 import ActivityBox from '../../components/ActivityBox';
 
@@ -7,9 +8,9 @@ const Homepage = () => {
   const newThemData = [];
   const newHastTagData = [];
   const newProdData = [];
-  const [themData, setThemData] = useState([newThemData]);
-  const [hastTagData, setHastTagData] = useState([newHastTagData]);
-  const [prodData, setProdData] = useState([newProdData]);
+  const [themData, setThemData] = useState([]);
+  const [hastTagData, setHastTagData] = useState([]);
+  const [prodData, setProdData] = useState([]);
   let newThemId = 1;
   let newTagId = 1;
   let newProdId = 1;
@@ -54,9 +55,10 @@ const Homepage = () => {
     });
   }, [activityData]);
 
-  console.log(newThemData);
-  console.log(newHastTagData);
-  console.log(newProdData);
+  // console.log(newThemData);
+  // console.log(newHastTagData);
+  console.log(prodData);
+  // console.log(newProdData);
 
   return (
     <main className='l-main'>

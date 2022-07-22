@@ -65,6 +65,16 @@ const ActivityBox = (props) => {
     return hashTag;
   };
 
+  const renderSwiper = () => {
+    return (
+      <div className='c-activityBox__slide'>
+        <ul className='c-activityBox__productBox'>
+          <ProductInfo prodData={prodData} renderElementTypeUrl={renderElementTypeUrl} />
+        </ul>
+      </div>
+    );
+  };
+
   // type FirstLink = {
   //   Text: string,
   //   Text2: string,
@@ -85,13 +95,7 @@ const ActivityBox = (props) => {
       <div className='c-activityBox__main'>{renderActivity()}</div>
       <div className='c-activityBox__product'>
         <div className='c-activityBox__info'>
-          <div className='c-activityBox__wrapper'>
-            <div className='c-activityBox__slide'>
-              <ul className='c-activityBox__productBox'>
-                <ProductInfo prodData={prodData} renderElementTypeUrl={renderElementTypeUrl} />
-              </ul>
-            </div>
-          </div>
+          <div className='c-activityBox__wrapper'>{renderSwiper()}</div>
         </div>
         <div className='c-activityBox__page'>
           <Page />

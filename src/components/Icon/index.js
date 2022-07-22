@@ -1,9 +1,9 @@
 import React from 'react';
-import './Icon.scss';
+import './icon.scss';
 
 const Icon = (props) => {
   const { style } = props;
-  return <i className={style} type='Icon'></i>;
+  return <i className={style}></i>;
 };
 
 export default Icon;
