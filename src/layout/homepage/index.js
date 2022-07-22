@@ -10,13 +10,16 @@ const Homepage = () => {
   const [themData, setThemData] = useState([newThemData]);
   const [hastTagData, setHastTagData] = useState([newHastTagData]);
   const [prodData, setProdData] = useState([newProdData]);
+  let newThemId = 1;
+  let newTagId = 1;
+  let newProdId = 1;
 
   useEffect(() => {
     // api refactored data
     activityData.forEach((item, index) => {
       if (item.Id === 1) {
         newThemData.push({
-          themId: index,
+          themId: newThemId++,
           themName: item.Link.Text2,
           themText: item.Link.Text,
           themBackgroundColor: item.Link.Background,
@@ -27,7 +30,7 @@ const Homepage = () => {
       }
       if (item.Id >= 2 && item.Id <= 6) {
         newHastTagData.push({
-          tagId: index,
+          tagId: newTagId++,
           tagName: item.Link.Text,
           tagLink: item.Link.Url,
           tagType: item.ExtraData.ElementType,
@@ -37,7 +40,7 @@ const Homepage = () => {
       }
       if (item.Id >= 7) {
         newProdData.push({
-          prodId: index,
+          prodId: newProdId++,
           prodName: item.Link.Text,
           prodPrice: item.Link.Text1,
           prodLink: item.Link.Url,
@@ -45,13 +48,15 @@ const Homepage = () => {
           prodType: item.ExtraData.ElementType,
           prodTypeSort: item.ExtraData.Sort,
         });
+
         setProdData(newProdData);
       }
     });
   }, [activityData]);
-  // console.log(themData);
-  // console.log(hastTagData);
-  // console.log(prodData);
+
+  console.log(newThemData);
+  console.log(newHastTagData);
+  console.log(newProdData);
 
   return (
     <main className='l-main'>
