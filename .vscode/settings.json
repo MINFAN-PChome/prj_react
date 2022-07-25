@@ -1,8 +1,4 @@
 {
   "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
-  "editor.acceptSuggestionOnCommitCharacter": false,
-  "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
-  "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
-  "prettier.semi": false
+  "editor.formatOnPaste": true
 }

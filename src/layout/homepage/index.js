@@ -57,7 +57,7 @@ const Homepage = () => {
 
   // console.log(newThemData);
   // console.log(newHastTagData);
-  console.log(prodData);
+  // console.log(prodData);
   // console.log(newProdData);
 
   return (

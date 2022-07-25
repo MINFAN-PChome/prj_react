@@ -13,7 +13,6 @@
     "start": "webpack serve --hot --mode development"
   },
   "dependencies": {
-    "@typescript-eslint/types": "^5.30.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-loader": "^4.13.0"
@@ -24,8 +23,6 @@
     "@babel/preset-env": "^7.18.6",
     "@babel/preset-react": "^7.18.6",
     "@hot-loader/react-dom": "^17.0.2",
-    "@typescript-eslint/eslint-plugin": "^5.30.6",
-    "@typescript-eslint/parser": "^5.30.6",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",

@@ -16,10 +16,27 @@ const renderElementTypeUrl = (type) => {
       return '';
   }
 };
+
 const activityTag = '主題推薦';
 
 const ActivityBox = (props) => {
   const { themData, hastTagData, prodData } = props;
+  // 筆數
+  const pageStamp = 6;
+  // 當前頁
+  const page = 1;
+  // 暫存頁
+  const pageCurrent = 1;
+
+  const pageAverage = () => {
+    const pageAll = prodData.length;
+    return Math.ceil(pageAll / pageStamp);
+  };
+  const renderChange = (page) => {
+    pageCurrent = page;
+    const allData = [];
+  };
+
   const renderActivity = () => {
     const activity = themData.map(
       ({ themId, themName, themBackgroundColor, themImg, themAlt }, index) => {
@@ -98,7 +115,7 @@ const ActivityBox = (props) => {
           <div className='c-activityBox__wrapper'>{renderSwiper()}</div>
         </div>
         <div className='c-activityBox__page'>
-          <Page />
+          <Page pageCurrent={pageCurrent} />
         </div>
       </div>
     </div>
