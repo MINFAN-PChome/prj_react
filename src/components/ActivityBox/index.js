@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProductInfo from '../ProductInfo';
 import Page from '../object/Page';
 import './activityBox.scss';
@@ -25,7 +25,7 @@ const ActivityBox = (props) => {
   // // 筆數
   let page = 6;
   // 暫存頁
-  let pageCurrent = 1;
+  const [pageCurrent, setPageCurrent] = useState(1);
   const pageAll = prodData.length;
 
   const renderActivity = () => {
@@ -74,18 +74,30 @@ const ActivityBox = (props) => {
   const pageAverage = () => {
     return Math.ceil(pageAll / page);
   };
-
+  const atCallPre = (pageNum) => {
+    if(pageCurrent <= 1){
+      pageCurrent = 1
+    }
+    setPageCurrent(--pageNum);
+    renderSwiper(pageNum);
+  };
+  const atCallNext = (pageNum) => {
+    if(pageCurrent >= pageAverage()){
+      pageCurrent = pageAverage()
+    }
+    setPageCurrent(++pageNum);
+    renderSwiper(pageNum);
+  };
   const renderSwiper = (pageNum) => {
-    pageCurrent = pageNum;
+    pageNum = pageCurrent;
     const allData = [];
     for (
-      let i = (pageCurrent - 1) * pageNum;
-      i < pageCurrent * pageNum && i < prodData.length;
+      let i = (pageNum - 1) * page;
+      i < pageNum * page && i < prodData.length;
       i++
     ) {
       allData.push(prodData[i]);
     }
-    console.log(pageCurrent);
 
     // console.log(pageAll + 'pageAll');
     console.log(pageNum);
@@ -93,15 +105,12 @@ const ActivityBox = (props) => {
     return (
       <div className='c-activityBox__slide'>
         <ul className='c-activityBox__productBox'>
-          <ProductInfo prodData={prodData} renderElementTypeUrl={renderElementTypeUrl} />
+          <ProductInfo prodData={allData} renderElementTypeUrl={renderElementTypeUrl} />
         </ul>
       </div>
     );
   };
 
-  const atClick = () => {
-    console.log('hi');
-  };
 
   // type FirstLink = {
   //   Text: string,
@@ -128,9 +137,10 @@ const ActivityBox = (props) => {
         <div className='c-activityBox__page'>
           <Page
             pageCurrent={pageCurrent}
+            onCallPre={atCallPre}
+            onCallNext={atCallNext}
             pageAverage={pageAverage}
             renderSwiper={renderSwiper}
-            atClick={atClick}
           />
         </div>
       </div>

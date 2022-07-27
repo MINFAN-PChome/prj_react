@@ -2,25 +2,15 @@ import React from 'react';
 import Button from '../../Button';
 import Icon from '../../Icon';
 import './page.scss';
-
 const Page = (props) => {
-  const { pageCurrent, pageAverage, renderSwiper } = props;
+  const { pageCurrent, onCallPre, onCallNext, pageAverage } = props;
+
   const atPagePre = () => {
-    pageCurrent--;
-    if (pageCurrent < 1) {
-      pageCurrent = 1;
-    }
-    renderSwiper(pageCurrent);
-    console.log(pageCurrent);
+    onCallPre(pageCurrent)
   };
   const atPageNext = () => {
-    pageCurrent++;
-    if (pageCurrent >= pageAverage()) {
-    }
-    renderSwiper(pageCurrent);
-    console.log(pageCurrent);
+    onCallNext(pageCurrent)
   };
-  console.log(pageCurrent);
 
   return (
     <div className='o-page'>
