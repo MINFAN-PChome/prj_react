@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductInfo from '../ProductInfo';
 import Page from '../object/Page';
 import './activityBox.scss';
@@ -19,8 +19,35 @@ const renderElementTypeUrl = (type) => {
 
 const activityTag = '主題推薦';
 
+
+
 const ActivityBox = (props) => {
-  const { themData, hastTagData, prodData } = props;
+  const newThemData = [];
+  const newHastTagData = [];
+  const newProdData = [];
+  const [themData, setThemData] = useState([]);
+  const [hastTagData, setHastTagData] = useState([]);
+  const [prodData, setProdData] = useState([]);
+  const { Nodes } = props;
+
+  useEffect(() => {
+    // api refactored data
+    Nodes.forEach((item) => {
+      if (item.Id === 1) {
+        newThemData.push(item);
+      }
+      if (item.Id >= 2 && item.Id <= 6) {
+        newHastTagData.push(item);
+      }
+      if (item.Id >= 7) {
+        newProdData.push(item);
+        setProdData(newProdData);
+      }
+    });
+    setThemData(newThemData);
+    setHastTagData(newHastTagData);
+    setProdData(newProdData);
+    }, [Nodes]);
 
   // // 筆數
   let page = 6;
@@ -44,7 +71,7 @@ const ActivityBox = (props) => {
               </div>
             </div>
             <div className='c-activity__theme'>
-              <img src={Img.Src} alt={Img.Text} />
+              <img src={'https://cs-a.ecimg.tw' + `${Img.Src}`} alt={Img.Text} />
             </div>
           </div>
         </div>
