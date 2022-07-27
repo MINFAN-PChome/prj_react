@@ -2,9 +2,9 @@ import React from 'react';
 import './button.scss';
 
 const Button = (props) => {
-  const { style, text, startIcon, endIcon } = props;
+  const { style, text, startIcon, endIcon, atClick } = props;
   return (
-    <button className={style} type='button'>
+    <button className={style} onClick={atClick} type='button'>
       {startIcon}
       {text}
       {endIcon}

@@ -11,48 +11,23 @@ const Homepage = () => {
   const [themData, setThemData] = useState([]);
   const [hastTagData, setHastTagData] = useState([]);
   const [prodData, setProdData] = useState([]);
-  let newThemId = 1;
-  let newTagId = 1;
-  let newProdId = 1;
-
   useEffect(() => {
     // api refactored data
-    activityData.forEach((item, index) => {
+    activityData.forEach((item) => {
       if (item.Id === 1) {
-        newThemData.push({
-          themId: newThemId++,
-          themName: item.Link.Text2,
-          themText: item.Link.Text,
-          themBackgroundColor: item.Link.Background,
-          themImg: item.Img.Src,
-          themAlt: item.Img.Text,
-        });
-        setThemData(newThemData);
+        newThemData.push(item);
       }
       if (item.Id >= 2 && item.Id <= 6) {
-        newHastTagData.push({
-          tagId: newTagId++,
-          tagName: item.Link.Text,
-          tagLink: item.Link.Url,
-          tagType: item.ExtraData.ElementType,
-        });
-
-        setHastTagData(newHastTagData);
+        newHastTagData.push(item);
       }
       if (item.Id >= 7) {
-        newProdData.push({
-          prodId: newProdId++,
-          prodName: item.Link.Text,
-          prodPrice: item.Link.Text1,
-          prodLink: item.Link.Url,
-          prodImg: item.Img.Src,
-          prodType: item.ExtraData.ElementType,
-          prodTypeSort: item.ExtraData.Sort,
-        });
-
+        newProdData.push(item);
         setProdData(newProdData);
       }
     });
+    setThemData(newThemData);
+    setHastTagData(newHastTagData);
+    setProdData(newProdData);
   }, [activityData]);
 
   // console.log(newThemData);

@@ -4,20 +4,26 @@ import './product.scss';
 const ProductInfo = (props) => {
   const { prodData, renderElementTypeUrl } = props;
 
-  return prodData.map((item, index) => {
-    const { prodId, prodName, prodPrice, prodLink, prodImg, prodType, prodTypeSort } = item;
+  return prodData.map((item) => {
+    const { Id, Link, Img, ExtraData } = item;
     return (
-      <li className='c-activityBox__item' key={index}>
+      <li className='c-activityBox__item' key={Id}>
         <a
           className='c-activityBox__link'
-          href={`${prodType === '' ? 'prodType' : renderElementTypeUrl(prodType)}` + prodLink}
+          href={
+            `${
+              ExtraData.ElementType === ''
+                ? 'prodType'
+                : renderElementTypeUrl(ExtraData.ElementType)
+            }` + Link.Url
+          }
         >
           <div className='c-productInfo'>
             <div className='c-productInfo__img'>
-              <img src={'https://cs-a.ecimg.tw' + `${prodImg}`} alt={prodName} />
+              <img src={'https://cs-a.ecimg.tw' + `${Img.Src}`} alt={Link.Text} />
             </div>
-            <div className='c-productInfo__title'>{prodName}</div>
-            <div className='c-productInfo__price'>${prodPrice}</div>
+            <div className='c-productInfo__title'>{Link.Text}</div>
+            <div className='c-productInfo__price'>${Link.Text1}</div>
           </div>
         </a>
       </li>

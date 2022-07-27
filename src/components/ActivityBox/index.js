@@ -21,68 +21,75 @@ const activityTag = '主題推薦';
 
 const ActivityBox = (props) => {
   const { themData, hastTagData, prodData } = props;
-  // 筆數
-  const pageStamp = 6;
-  // 當前頁
-  const page = 1;
-  // 暫存頁
-  const pageCurrent = 1;
 
-  const pageAverage = () => {
-    const pageAll = prodData.length;
-    return Math.ceil(pageAll / pageStamp);
-  };
-  const renderChange = (page) => {
-    pageCurrent = page;
-    const allData = [];
-  };
+  // // 筆數
+  let page = 6;
+  // 暫存頁
+  let pageCurrent = 1;
+  const pageAll = prodData.length;
 
   const renderActivity = () => {
-    const activity = themData.map(
-      ({ themId, themName, themBackgroundColor, themImg, themAlt }, index) => {
-        return (
-          <div className='c-activity' key={index}>
-            <div
-              className='c-activity__editThem'
-              style={{ backgroundColor: `${themBackgroundColor}` }}
-            >
-              <div className='c-activity__info'>
-                <div className='c-activity__tag'>
-                  <div className='c-activity__tagEdit'>{activityTag}</div>
-                </div>
-                {<div className='c-activity__title'>{themName}</div>}
-                <div className='c-activity__hashtagBox'>
-                  <ul className='c-activity__hashtag'>{renderHastTag()}</ul>
-                </div>
+    const activity = themData.map((them) => {
+      const { Id, Link, Img } = them;
+      return (
+        <div className='c-activity' key={Id}>
+          <div className='c-activity__editThem' style={{ backgroundColor: `${Link.Background}` }}>
+            <div className='c-activity__info'>
+              <div className='c-activity__tag'>
+                <div className='c-activity__tagEdit'>{activityTag}</div>
               </div>
-              <div className='c-activity__theme'>
-                <img src={themImg} alt={themAlt} />
+              {<div className='c-activity__title'>{Link.Text2}</div>}
+              <div className='c-activity__hashtagBox'>
+                <ul className='c-activity__hashtag'>{renderHastTag()}</ul>
               </div>
             </div>
+            <div className='c-activity__theme'>
+              <img src={Img.Src} alt={Img.Text} />
+            </div>
           </div>
-        );
-      }
-    );
+        </div>
+      );
+    });
     return activity;
   };
   const renderHastTag = () => {
-    const hashTag = hastTagData.map((tag, index) => {
-      const { tagId, tagName, tagLink, tagType } = tag;
+    const hashTag = hastTagData.map((tag) => {
+      const { Id, Link, ExtraData } = tag;
       return (
-        <li className='c-activity__item' key={index}>
+        <li className='c-activity__item' key={Id}>
           <a
-            href={`${tagType === '' ? 'prodType' : renderElementTypeUrl(tagType)}` + tagLink}
+            href={
+              `${Link.Url === '' ? 'prodType' : renderElementTypeUrl(ExtraData.ElementType)}` +
+              Link.Url
+            }
             className='c-activity__link'
           >
-            #{tagName}
+            #{Link.Text}
           </a>
         </li>
       );
     });
     return hashTag;
   };
+  const pageAverage = () => {
+    return Math.ceil(pageAll / page);
+  };
 
-  const renderSwiper = () => {
+  const renderSwiper = (pageNum) => {
+    pageCurrent = pageNum;
+    const allData = [];
+    for (
+      let i = (pageCurrent - 1) * pageNum;
+      i < pageCurrent * pageNum && i < prodData.length;
+      i++
+    ) {
+      allData.push(prodData[i]);
+    }
+    console.log(pageCurrent);
+
+    // console.log(pageAll + 'pageAll');
+    console.log(pageNum);
+    console.log(allData);
     return (
       <div className='c-activityBox__slide'>
         <ul className='c-activityBox__productBox'>
@@ -90,6 +97,10 @@ const ActivityBox = (props) => {
         </ul>
       </div>
     );
+  };
+
+  const atClick = () => {
+    console.log('hi');
   };
 
   // type FirstLink = {
@@ -115,7 +126,12 @@ const ActivityBox = (props) => {
           <div className='c-activityBox__wrapper'>{renderSwiper()}</div>
         </div>
         <div className='c-activityBox__page'>
-          <Page pageCurrent={pageCurrent} />
+          <Page
+            pageCurrent={pageCurrent}
+            pageAverage={pageAverage}
+            renderSwiper={renderSwiper}
+            atClick={atClick}
+          />
         </div>
       </div>
     </div>
