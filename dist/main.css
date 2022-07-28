@@ -166,10 +166,12 @@ table {
 .c-productInfo__title {
   overflow: hidden;
   margin-top: 8px;
+  width: 152px;
   height: 48px;
   color: #2B2B2B;
   font-size: 16px;
-  font-family: 'Noto Sans TC'; }
+  font-family: 'Noto Sans TC';
+  text-overflow: ellipsis; }
 
 .c-productInfo__img {
   overflow: hidden;
@@ -200,6 +202,9 @@ button {
   cursor: pointer; }
 
 .o-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #fff; }
   .o-btn .is-disabled {
     border-color: #E5E5E5; }
@@ -220,8 +225,14 @@ button {
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/sass-resources-loader/lib/loader.js??ruleSet[1].rules[2].use[3]!./src/components/Icon/icon.scss ***!
   \*******************************************************************************************************************************************************************************************************/
-.o-icon--next {
-  background: url(c6d4a041179d9f78f351.svg) no-repeat; }
+.o-icon {
+  display: flex; }
+  .o-icon--prev {
+    transform: rotate(180deg); }
+  .o-icon--next, .o-icon--prev {
+    width: 10px;
+    height: 16px;
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMCAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAuNzUgMTQuOTg4MkwwLjc1IDEuMDExODRDMC43NSAwLjI2OTQyNCAxLjY0NzYyIC0wLjEwMjM4MyAyLjE3MjU5IDAuNDIyNTg3TDkuMTYwNzQgNy40MTA3NEM5LjQ4NjE4IDcuNzM2MTggOS40ODYxOCA4LjI2MzgyIDkuMTYwNzQgOC41ODkyNkwyLjE3MjU5IDE1LjU3NzRDMS42NDc2MiAxNi4xMDI0IDAuNzUgMTUuNzMwNiAwLjc1IDE0Ljk4ODJaIiBmaWxsPSIjRUExNzE3Ii8+Cjwvc3ZnPgo=) no-repeat; }
 
 /*!**************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/sass-resources-loader/lib/loader.js??ruleSet[1].rules[2].use[3]!./src/components/object/Page/page.scss ***!
@@ -283,27 +294,31 @@ button {
     position: absolute;
     top: 16px;
     left: 0;
-    box-shadow: 0 4px 0 rgba(43, 43, 43, 0.1); }
-    .c-activity__tag::after {
-      content: '';
-      display: flex;
-      background: url(db42b611c4b45dc84aac.svg); }
+    display: flex; }
   .c-activity__tagEdit {
-    padding: 12px 0 12px 8px;
+    position: relative;
+    margin-left: -6px;
+    padding: 12px 16px;
+    border-radius: 0 3px 3px 0;
     background: #0090EB;
+    box-shadow: 0 4px 0 rgba(43, 43, 43, 0.1);
     text-shadow: 0 2px 0 rgba(43, 43, 43, 0.15);
-    font-style: italic; }
+    font-style: italic;
+    transform: skewX(-14deg); }
   .c-activity__title {
     position: absolute;
     top: 64px;
     left: 24px;
     overflow: hidden;
     width: 274px;
+    height: 108px;
     font-size: 36px;
     font-weight: 700; }
   .c-activity__info {
+    position: absolute;
     display: flex;
     padding: 48px 24px;
+    height: 100%;
     font-size: 16px;
     font-weight: 500; }
   .c-activity__hashtagBox {
@@ -324,9 +339,11 @@ button {
     color: #fff; }
   .c-activity__theme {
     overflow: hidden;
+    margin-left: auto;
     width: 360px;
     height: 100%;
-    border-radius: 64px 0 0; }
+    border-radius: 64px 0 0;
+    background: #C7C7C7; }
     .c-activity__theme img {
       width: 100%;
       height: 100%;

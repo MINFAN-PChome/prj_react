@@ -19,8 +19,6 @@ const renderElementTypeUrl = (type) => {
 
 const activityTag = '主題推薦';
 
-
-
 const ActivityBox = (props) => {
   const newThemData = [];
   const newHastTagData = [];
@@ -71,7 +69,7 @@ const ActivityBox = (props) => {
               </div>
             </div>
             <div className='c-activity__theme'>
-              <img src={'https://cs-a.ecimg.tw' + `${Img.Src}`} alt={Img.Text} />
+              <img src={`https://cs-a.ecimg.tw${Img.Src}`} alt={Img.Text} />
             </div>
           </div>
         </div>

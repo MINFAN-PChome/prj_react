@@ -3,6 +3,9 @@ button{
   cursor: pointer;
 }
 .o-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: $white;
   & .is-disabled{
     border-color: $gray-200;

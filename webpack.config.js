@@ -27,6 +27,7 @@ const config = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
+              publicPath: '../',
             },
           },
           'postcss-loader',
@@ -54,20 +55,8 @@ const config = {
         loader: 'url-loader',
       },
       {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'url-loader',
-          },
-        ],
-      },
-      {
-        test: /\.png|.svg$/,
-        use: [
-          {
-            loader: 'url-loader',
-          },
-        ],
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
+        type: 'asset/inline'
       },
       {
         test: /\.(js|jsx)$/,

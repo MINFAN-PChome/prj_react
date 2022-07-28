@@ -1,5 +1,11 @@
 .o-icon{
-  &--next{
-    background: url('./../../assets/images/icon/icon-Arrow.svg') no-repeat;
+  display: flex;
+  &--prev{
+    transform: rotate(180deg);
+  }
+  &--next,&--prev{
+    width: 10px;
+    height: 16px;
+    background: url('../../assets/images/icon/icon-Arrow.svg') no-repeat;
   }
 }

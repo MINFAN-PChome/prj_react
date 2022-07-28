@@ -20,10 +20,12 @@
   &__title {
     overflow: hidden;
     margin-top: 8px;
+    width: 152px;
     height: 48px;
     color: $gray-700;
     font-size: 16px;
     font-family: 'Noto Sans TC';
+    text-overflow: ellipsis;
   }
   &__img {
     overflow: hidden;

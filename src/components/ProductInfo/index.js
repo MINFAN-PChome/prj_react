@@ -20,7 +20,7 @@ const ProductInfo = (props) => {
         >
           <div className='c-productInfo'>
             <div className='c-productInfo__img'>
-              <img src={'https://cs-a.ecimg.tw' + `${Img.Src}`} alt={Link.Text} />
+              <img src={`https://cs-a.ecimg.tw${Img.Src}`} alt={Link.Text} />
             </div>
             <div className='c-productInfo__title'>{Link.Text}</div>
             <div className='c-productInfo__price'>${Link.Text1}</div>
