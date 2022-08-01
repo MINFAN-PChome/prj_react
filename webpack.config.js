@@ -56,7 +56,12 @@ const config = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/i,
-        type: 'asset/inline'
+        type: 'asset/inline',
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack', 'url-loader', 'file - loader'],
       },
       {
         test: /\.(js|jsx)$/,

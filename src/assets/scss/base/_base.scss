@@ -1,8 +1,9 @@
+@use './../utils/variables';
 *{
   font-size: 100%;line-height: 1.5;box-sizing: border-box;
 }
 body{
-  font-family: "Noto Sans TC",Montserrat,Roboto,Helvetica,Arial,sans-serif;
+  font-family: $font-family;
   background: #F2F2F2;
 }
 .l-container{

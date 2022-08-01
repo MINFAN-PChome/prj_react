@@ -4,8 +4,10 @@
     transform: rotate(180deg);
   }
   &--next,&--prev{
-    width: 10px;
-    height: 16px;
-    background: url('../../assets/images/icon/icon-Arrow.svg') no-repeat;
+    width: 7px;
+    height: 12px;
+    background: url('../../assets/images/icon/icon-Arrow--primary.svg') no-repeat;
+    background-size: cover;
+    transition: all .35s;
   }
 }

@@ -39,13 +39,12 @@ const ActivityBox = (props) => {
       }
       if (item.Id >= 7) {
         newProdData.push(item);
-        setProdData(newProdData);
       }
     });
     setThemData(newThemData);
     setHastTagData(newHastTagData);
     setProdData(newProdData);
-    }, [Nodes]);
+  }, [Nodes]);
 
   // // 筆數
   let page = 6;
@@ -100,15 +99,15 @@ const ActivityBox = (props) => {
     return Math.ceil(pageAll / page);
   };
   const atCallPre = (pageNum) => {
-    if(pageCurrent <= 1){
-      pageCurrent = 1
+    if (pageCurrent <= 1) {
+      pageCurrent = 1;
     }
     setPageCurrent(--pageNum);
     renderSwiper(pageNum);
   };
   const atCallNext = (pageNum) => {
-    if(pageCurrent >= pageAverage()){
-      pageCurrent = pageAverage()
+    if (pageCurrent >= pageAverage()) {
+      pageCurrent = pageAverage();
     }
     setPageCurrent(++pageNum);
     renderSwiper(pageNum);
@@ -116,17 +115,10 @@ const ActivityBox = (props) => {
   const renderSwiper = (pageNum) => {
     pageNum = pageCurrent;
     const allData = [];
-    for (
-      let i = (pageNum - 1) * page;
-      i < pageNum * page && i < prodData.length;
-      i++
-    ) {
+    for (let i = (pageNum - 1) * page; i < pageNum * page && i < prodData.length; i++) {
       allData.push(prodData[i]);
     }
 
-    // console.log(pageAll + 'pageAll');
-    console.log(pageNum);
-    console.log(allData);
     return (
       <div className='c-activityBox__slide'>
         <ul className='c-activityBox__productBox'>
@@ -135,7 +127,6 @@ const ActivityBox = (props) => {
       </div>
     );
   };
-
 
   // type FirstLink = {
   //   Text: string,
@@ -165,7 +156,6 @@ const ActivityBox = (props) => {
             onCallPre={atCallPre}
             onCallNext={atCallNext}
             pageAverage={pageAverage}
-            renderSwiper={renderSwiper}
           />
         </div>
       </div>

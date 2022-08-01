@@ -1,5 +1,5 @@
-import React from "react";
-import "./icon.scss";
+import React from 'react';
+import './icon.scss';
 
 const Icon = (props) => {
   const { style } = props;

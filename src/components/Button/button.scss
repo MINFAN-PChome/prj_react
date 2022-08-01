@@ -7,18 +7,12 @@ button{
   justify-content: center;
   align-items: center;
   background: $white;
-  & .is-disabled{
-    border-color: $gray-200;
-  }
   &--circle{
     width: 36px;
     height: 36px;
     border: 1px solid transparent;
     border-radius: 100%;
     transition: all .35s;
-  }
-  &--circle{
-
   }
   &--prev,&--next{
     border-color: $gray-200;
@@ -27,6 +21,25 @@ button{
       height: 40px;
       border-color: $primary;
       box-shadow: 0 2px 16px rgba($primary, .1);
+      .o-icon{
+        width: 10px;
+        height: 18px;
+      }
+    }
+  }
+  &.is-disabled{
+    border-color: $gray-200;
+    &:hover{
+      width: 36px;
+      height: 36px;
+      cursor: default;
+      box-shadow: inherit;
+    }
+    .o-icon{
+      width: 7px;
+      height: 12px;
+      background: url('../../assets/images/icon/icon-Arrow--disabled.svg') no-repeat;
+      background-size: cover;
     }
   }
 }
