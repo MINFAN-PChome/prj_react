@@ -106,7 +106,7 @@ const ActivityBox = (props) => {
     renderSwiper(pageNum);
   };
   const atCallNext = (pageNum) => {
-    if (pageCurrent >= pageAverage()) {
+    if (pageCurrent > pageAverage()) {
       pageCurrent = pageAverage();
     }
     setPageCurrent(++pageNum);
@@ -156,6 +156,7 @@ const ActivityBox = (props) => {
             onCallPre={atCallPre}
             onCallNext={atCallNext}
             pageAverage={pageAverage}
+
           />
         </div>
       </div>
