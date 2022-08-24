@@ -1,9 +1,9 @@
-const webpack = require('webpack');
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = {
   entry: ['react-hot-loader/patch', './src/index.js'],
@@ -71,11 +71,22 @@ const config = {
     ],
   },
   devServer: {
-    static: {
-      directory: './dist',
-    },
     port: 3005,
-    // 'open' : true,  // this is point option
+    proxy: {
+      '/index/stage/v1/': {
+        target: 'https://24h.pchome.com.tw',
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/index/stage/v1/': '/index/stage/v1/',
+        },
+      },
+    },
+    hot: 'only',
+    static: {
+      directory: path.join(__dirname, './'),
+      serveIndex: true,
+    },
   },
   plugins: [
     new CopyPlugin({
@@ -100,13 +111,13 @@ const config = {
       },
     },
   },
-};
+}
 
 module.exports = (env, argv) => {
   if (argv.hot) {
     // Cannot use 'contenthash' when hot reloading is enabled.
-    config.output.filename = '[name].js';
+    config.output.filename = '[name].js'
   }
 
-  return config;
-};
+  return config
+}
