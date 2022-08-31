@@ -13,6 +13,7 @@
     "start": "webpack serve --hot --mode development"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-loader": "^4.13.0"
