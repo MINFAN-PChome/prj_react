@@ -6,14 +6,12 @@ import ActivityBox from '../../components/ActivityBox';
 import axios from 'axios';
 
 const Homepage = () => {
-  const [newBlock, setNewBlock] = useState(null);
-  const [newTab, setNewTab] = useState(null);
+  const [newBlock, setNewBlock] = useState([]);
   const baseURL = '/index/stage/v1/data&27655702';
   useEffect(() => {
     axios.get(baseURL).then(
       (response) => {
         setNewBlock(response?.data?.window1?.Blocks);
-        setNewTab(response?.data?.window1?.Blocks[0]);
         console.log(response + '萬歲');
       },
       (err) => {
@@ -26,7 +24,7 @@ const Homepage = () => {
     <main className='l-main'>
       <div className='l-container'>
         {/* <ActivityBox themData={themData} hastTagData={hastTagData} prodData={prodData} key={BlockId} /> */}
-        <ActivityBox newBlock={newBlock} newTab={newTab} setNewTab={setNewTab} />
+        <ActivityBox newBlock={newBlock} />
       </div>
     </main>
   );

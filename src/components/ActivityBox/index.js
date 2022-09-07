@@ -7,8 +7,9 @@ import ToolBar from '../ToolBar';
 import './activityBox.scss';
 import getElementTypeUrl from './../../utils/getElementTypeUrl';
 
-const ActivityBox = (props) => {
-  const { activityTag = '主題推薦', newBlock, newTab, setNewTab } = props;
+const ActivityBox = ({ activityTag = '主題推薦', newBlock }) => {
+  const [newTab, setNewTab] = useState([]);
+
   const newThemData = [];
   const newHastTagData = [];
   const newProdData = [];
@@ -16,12 +17,15 @@ const ActivityBox = (props) => {
   const [hastTagData, setHastTagData] = useState([]);
   const [prodData, setProdData] = useState([]);
 
-  const newAllData = [];
-
-  const [page] = useState(6);
+  const page = 6;
   const [pageCurrent, setPageCurrent] = useState(1);
   const [allProdData, setAllProdData] = useState([]);
   const pageAll = prodData.length;
+  const newAllData = [];
+
+  useEffect(() => {
+    setNewTab(newBlock[0]);
+  }, [newBlock]);
 
   useEffect(() => {
     // api refactored data
@@ -36,23 +40,23 @@ const ActivityBox = (props) => {
         newProdData.push(item);
       }
     });
-    renderChange(pageCurrent);
 
     setThemData(newThemData);
     setHastTagData(newHastTagData);
     setProdData(newProdData);
-  }, [newTab, pageCurrent]);
+  }, [newTab]);
 
-  const renderChange = (pageCurrent) => {
-    for (let i = (pageCurrent - 1) * page; i < pageCurrent * page && i < prodData.length; i++) {
-      newAllData.push(prodData[i]);
-    }
-    setAllProdData(newAllData);
-  };
+  useEffect(() => {
+    const startPage = (pageCurrent - 1) * page;
+    setAllProdData(prodData.slice(startPage, startPage + page));
+  }, [prodData, pageCurrent]);
 
-  const pageAverage = () => {
-    return Math.ceil(pageAll / page);
-  };
+  // const renderChange = (pageCurrent) => {
+  //   for (let i = (pageCurrent - 1) * page; i < pageCurrent * page && i < prodData.length; i++) {
+  //     newAllData.push(prodData[i]);
+  //   }
+  //   setAllProdData(newAllData);
+  // };
 
   return (
     <div className='c-activityBox'>
@@ -93,7 +97,7 @@ const ActivityBox = (props) => {
                 <ProductInfo
                   allProdData={allProdData}
                   getElementTypeUrl={getElementTypeUrl}
-                  renderChange={renderChange}
+                  // renderChange={renderChange}
                 />
               </ul>
             </div>
@@ -103,9 +107,9 @@ const ActivityBox = (props) => {
           <Page
             pageCurrent={pageCurrent}
             setPageCurrent={setPageCurrent}
-            pageAverage={pageAverage}
+            pageAverage={Math.ceil(pageAll / page)}
             getElementTypeUrl={getElementTypeUrl}
-            renderChange={renderChange}
+            // renderChange={renderChange}
           />
         </div>
       </div>
