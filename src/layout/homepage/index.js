@@ -2,20 +2,19 @@ import React from 'react';
 import '../../assets/scss/all.scss';
 
 // import { activityData } from '../../config';
+import axiosAPI from '../../config';
 import ActivityBox from '../../components/ActivityBox';
 
-const Homepage = ({ data }) => {
-  console.log(data?.window1?.Blocks);
+const Homepage = () => {
+  const baseURL = '/index/stage/v1/data&27655702';
+
+  const { newBlock, isLoading, isError } = axiosAPI(baseURL);
+
   return (
     <main className='l-main'>
       <div className='l-container'>
-        {data?.window1?.Blocks.map((them) => {
-          const { BlockId, Nodes } = them;
-          return (
-            // <ActivityBox themData={themData} hastTagData={hastTagData} prodData={prodData} key={BlockId} />
-            <ActivityBox key={BlockId} Nodes={Nodes} />
-          );
-        })}
+        {/* <ActivityBox themData={themData} hastTagData={hastTagData} prodData={prodData} key={BlockId} /> */}
+        <ActivityBox newBlock={newBlock} />
       </div>
     </main>
   );

@@ -1,15 +1,3 @@
-.c-activityBox{
-  &__productBox{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  &__item{
-    display: inline-flex;
-    width: calc(100% / 3);
-    max-width: 152px;
-  }
-}
 .c-productInfo {
   &:hover  &__img{
     opacity: .8;
@@ -25,6 +13,7 @@
     color: $gray-700;
     font-size: 16px;
     font-weight: 500;
+    /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
     font-family: 'Noto Sans TC';
     text-overflow: ellipsis;
   }
@@ -46,7 +35,8 @@
     margin-top: 4px;
     color: $primary;
     font-size: 18px;
-    font-family: Montserrat;
+    /* stylelint-disable-next-line font-family-name-quotes */
+    font-family: 'Montserrat';
     font-style: italic;
     font-weight: 700;
     line-height: 1.5;

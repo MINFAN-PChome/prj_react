@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './product.scss';
 
 const ProductInfo = (props) => {
-  const { prodData, renderElementTypeUrl } = props;
+  const { allProdData, getElementTypeUrl } = props;
 
-  return prodData.map((item) => {
+  return allProdData.map((item) => {
     const { Id, Link, Img, ExtraData } = item;
     return (
       <li className='c-activityBox__item' key={Id}>
@@ -12,9 +14,7 @@ const ProductInfo = (props) => {
           className='c-activityBox__link'
           href={
             `${
-              ExtraData.ElementType === ''
-                ? 'prodType'
-                : renderElementTypeUrl(ExtraData.ElementType)
+              ExtraData.ElementType === '' ? 'prodType' : getElementTypeUrl(ExtraData.ElementType)
             }` + Link.Url
           }
         >
@@ -29,6 +29,10 @@ const ProductInfo = (props) => {
       </li>
     );
   });
+};
+ProductInfo.propTypes = {
+  allProdData: PropTypes.array.isRequired,
+  getElementTypeUrl: PropTypes.func.isRequired,
 };
 
 export default ProductInfo;

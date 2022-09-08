@@ -1,162 +1,142 @@
 import React, { useEffect, useState } from 'react';
 import ProductInfo from '../ProductInfo';
 import Page from '../object/Page';
+import HastTag from '../object/HastTag';
+
+import ToolBar from '../ToolBar';
 import './activityBox.scss';
+import getElementTypeUrl from './../../utils/getElementTypeUrl';
 
-const renderElementTypeUrl = (type) => {
-  switch (type) {
-    case 'Store':
-      return 'https://24h.pchome.com.tw/store/';
-    case 'Prod':
-      return 'https://24h.pchome.com.tw/prod/';
-    case 'Search':
-      return 'https://ecshweb.pchome.com.tw/search/v3.3/?q=';
+const ActivityBox = ({ activityTag = '主題推薦', newBlock }) => {
+  const [newTab, setNewTab] = useState([]);
 
-    default:
-      return '';
-  }
-};
-
-const activityTag = '主題推薦';
-
-const ActivityBox = (props) => {
   const newThemData = [];
   const newHastTagData = [];
   const newProdData = [];
   const [themData, setThemData] = useState([]);
   const [hastTagData, setHastTagData] = useState([]);
   const [prodData, setProdData] = useState([]);
-  const { Nodes } = props;
+
+  const page = 6;
+  const [pageCurrent, setPageCurrent] = useState(1);
+  const [allProdData, setAllProdData] = useState([]);
+  const pageAll = prodData.length;
+  const newAllData = [];
+
+  useEffect(() => {
+    setNewTab(newBlock[0]);
+  }, [newBlock]);
 
   useEffect(() => {
     // api refactored data
-    Nodes.forEach((item) => {
-      if (item.Id === 1) {
+    newTab?.Nodes?.forEach((item) => {
+      if (item?.Id === 1) {
         newThemData.push(item);
       }
-      if (item.Id >= 2 && item.Id <= 6) {
+      if (item?.Id >= 2 && item.Id <= 6) {
         newHastTagData.push(item);
       }
-      if (item.Id >= 7) {
+      if (item?.Id >= 7) {
         newProdData.push(item);
       }
     });
+
     setThemData(newThemData);
     setHastTagData(newHastTagData);
     setProdData(newProdData);
-  }, [Nodes]);
+  }, [newTab]);
+  useEffect(() => {
+    const startPage = (pageCurrent - 1) * page;
+    setAllProdData(prodData.slice(startPage, startPage + page));
+  }, [prodData, pageCurrent]);
 
-  // // 筆數
-  let page = 6;
-  // 暫存頁
-  const [pageCurrent, setPageCurrent] = useState(1);
-  const pageAll = prodData.length;
-
-  const renderActivity = () => {
-    const activity = themData.map((them) => {
-      const { Id, Link, Img } = them;
-      return (
-        <div className='c-activity' key={Id}>
-          <div className='c-activity__editThem' style={{ backgroundColor: `${Link.Background}` }}>
-            <div className='c-activity__info'>
-              <div className='c-activity__tag'>
-                <div className='c-activity__tagEdit'>{activityTag}</div>
-              </div>
-              {<div className='c-activity__title'>{Link.Text2}</div>}
-              <div className='c-activity__hashtagBox'>
-                <ul className='c-activity__hashtag'>{renderHastTag()}</ul>
-              </div>
-            </div>
-            <div className='c-activity__theme'>
-              <img src={`https://cs-a.ecimg.tw${Img.Src}`} alt={Img.Text} />
-            </div>
-          </div>
-        </div>
-      );
-    });
-    return activity;
-  };
-  const renderHastTag = () => {
-    const hashTag = hastTagData.map((tag) => {
-      const { Id, Link, ExtraData } = tag;
-      return (
-        <li className='c-activity__item' key={Id}>
-          <a
-            href={
-              `${Link.Url === '' ? 'prodType' : renderElementTypeUrl(ExtraData.ElementType)}` +
-              Link.Url
-            }
-            className='c-activity__link'
-          >
-            #{Link.Text}
-          </a>
-        </li>
-      );
-    });
-    return hashTag;
-  };
-  const pageAverage = () => {
-    return Math.ceil(pageAll / page);
-  };
-  const atCallPre = (pageNum) => {
-    if (pageCurrent <= 1) {
-      pageCurrent = 1;
-    }
-    setPageCurrent(--pageNum);
-    renderSwiper(pageNum);
-  };
-  const atCallNext = (pageNum) => {
-    if (pageCurrent > pageAverage()) {
-      pageCurrent = pageAverage();
-    }
-    setPageCurrent(++pageNum);
-    renderSwiper(pageNum);
-  };
-  const renderSwiper = (pageNum) => {
-    pageNum = pageCurrent;
-    const allData = [];
-    for (let i = (pageNum - 1) * page; i < pageNum * page && i < prodData.length; i++) {
-      allData.push(prodData[i]);
-    }
-
-    return (
-      <div className='c-activityBox__slide'>
-        <ul className='c-activityBox__productBox'>
-          <ProductInfo prodData={allData} renderElementTypeUrl={renderElementTypeUrl} />
-        </ul>
-      </div>
-    );
-  };
-
-  // type FirstLink = {
-  //   Text: string,
-  //   Text2: string,
-  //   backgroundColor: string,
+  // const renderChange = (pageCurrent) => {
+  //   for (let i = (pageCurrent - 1) * page; i < pageCurrent * page && i < prodData.length; i++) {
+  //     newAllData.push(prodData[i]);
+  //   }
+  //   setAllProdData(newAllData);
   // };
-  // type FirstImg = {
-  //   Src: string,
-  //   Text: string,
-  // };
-  // type themDataType = {
-  //   Id: number,
-  //   Link: Array<FirstLink>,
-  //   Img: Array<FirstImg>,
-  // };
+
+  const isActive = useState(false);
+
+  // 回傳
+  const handleToolBarClick = (index) => {
+    setNewTab(newBlock[index]);
+  };
 
   return (
     <div className='c-activityBox'>
-      <div className='c-activityBox__main'>{renderActivity()}</div>
+      <div className='c-activityBox__main'>
+        {/* <ToolBar newBlock={newBlock} newTab={newTab} setNewTab={setNewTab} /> */}
+        <div className='c-toolBar'>
+          <ul className='c-toolBarGroup'>
+            {newBlock?.map((item, index) => (
+              <li
+                className={`c-toolBarItem ${
+                  isActive && item?.Nodes[0] === newTab?.Nodes[0] ? 'is-active' : ''
+                }`}
+                onClick={() => {
+                  if (index === 0) return;
+                  handleToolBarClick(index);
+                }}
+                key={`${item?.Id}_${index}`}
+              >
+                <a href='' className='c-toolBarLink'>
+                  {item?.Nodes[0]?.Link?.Text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        ;
+        {themData?.map((item) => {
+          const { Id, Link, Img } = item;
+          return (
+            <div className='c-activityBox__them' key={Id}>
+              <div
+                className='c-activityBox__editThem'
+                style={{ backgroundColor: `${Link.Background}` }}
+              >
+                <div className='c-activityBox__info'>
+                  <div className='c-activityBox__tag'>
+                    <div className='c-activityBox__tagEdit'>{activityTag}</div>
+                  </div>
+                  <div className='c-activityBox__title'>{Link.Text2}</div>
+                  <div className='c-activityBox__hashtagBox'>
+                    <ul className='c-activityBox__hashtag'>
+                      <HastTag hastTagData={hastTagData} getElementTypeUrl={getElementTypeUrl} />
+                    </ul>
+                  </div>
+                </div>
+                <div className='c-activityBox__theme'>
+                  <img src={`https://fs-a.ecimg.tw${Img.Src}`} alt={Img.Text} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
       <div className='c-activityBox__product'>
         <div className='c-activityBox__info'>
-          <div className='c-activityBox__wrapper'>{renderSwiper()}</div>
+          <div className='c-listInfo__info'>
+            <div className='c-listInfo__wrapper'>
+              <ul className='c-listInfo__productBox'>
+                <ProductInfo
+                  allProdData={allProdData}
+                  getElementTypeUrl={getElementTypeUrl}
+                  // renderChange={renderChange}
+                />
+              </ul>
+            </div>
+          </div>
         </div>
         <div className='c-activityBox__page'>
           <Page
             pageCurrent={pageCurrent}
-            onCallPre={atCallPre}
-            onCallNext={atCallNext}
-            pageAverage={pageAverage}
-
+            setPageCurrent={setPageCurrent}
+            pageAverage={Math.ceil(pageAll / page)}
+            getElementTypeUrl={getElementTypeUrl}
+            // renderChange={renderChange}
           />
         </div>
       </div>
