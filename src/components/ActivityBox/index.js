@@ -45,7 +45,6 @@ const ActivityBox = ({ activityTag = '主題推薦', newBlock }) => {
     setHastTagData(newHastTagData);
     setProdData(newProdData);
   }, [newTab]);
-
   useEffect(() => {
     const startPage = (pageCurrent - 1) * page;
     setAllProdData(prodData.slice(startPage, startPage + page));
@@ -58,10 +57,38 @@ const ActivityBox = ({ activityTag = '主題推薦', newBlock }) => {
   //   setAllProdData(newAllData);
   // };
 
+  const isActive = useState(false);
+
+  // 回傳
+  const handleToolBarClick = (index) => {
+    setNewTab(newBlock[index]);
+  };
+
   return (
     <div className='c-activityBox'>
       <div className='c-activityBox__main'>
-        <ToolBar newBlock={newBlock} newTab={newTab} setNewTab={setNewTab} />
+        {/* <ToolBar newBlock={newBlock} newTab={newTab} setNewTab={setNewTab} /> */}
+        <div className='c-toolBar'>
+          <ul className='c-toolBarGroup'>
+            {newBlock?.map((item, index) => (
+              <li
+                className={`c-toolBarItem ${
+                  isActive && item?.Nodes[0] === newTab?.Nodes[0] ? 'is-active' : ''
+                }`}
+                onClick={() => {
+                  if (index === 0) return;
+                  handleToolBarClick(index);
+                }}
+                key={`${item?.Id}_${index}`}
+              >
+                <a href='' className='c-toolBarLink'>
+                  {item?.Nodes[0]?.Link?.Text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        ;
         {themData?.map((item) => {
           const { Id, Link, Img } = item;
           return (
