@@ -5,6 +5,7 @@ const ToolBar = (them) => {
   const { newBlock, newTab, setNewTab } = them;
   const isActive = useState(false);
   // console.log(newBlock);
+  
   // 回傳
   const handleToolBarClick = (index) => {
     setNewTab(newBlock[index]);
