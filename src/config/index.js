@@ -3,16 +3,17 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const axiosAPI = (url) => {
-  const [newBlock, setNewBlock] = useState([]);
+  const [newData, setNewData] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setError] = useState('');
 
   useEffect(() => {
     axios
       .get(url)
-      .then((response) => {
-        setNewBlock(response?.data?.window1?.Blocks);
-        console.log(response + '萬歲');
+      .then((res) => {
+        setNewData(res?.data);
+        console.log(res + '萬歲');
       })
       .catch((err) => {
         setError(err);
@@ -22,7 +23,7 @@ const axiosAPI = (url) => {
         setIsLoading(false);
       });
   }, [url]);
-  return { newBlock, isLoading, isError };
+  return { newData, isLoading, isError };
 };
 
 export default axiosAPI;
