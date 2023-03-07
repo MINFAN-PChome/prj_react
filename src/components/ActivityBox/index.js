@@ -46,12 +46,12 @@ const ActivityBox = ({ activityTag = '主題推薦', newBlock, newTab, setNewTab
     setAllProdData(prodData.slice(startPage, startPage + page));
   }, [prodData, pageCurrent]);
 
-  // const renderChange = (pageCurrent) => {
-  //   for (let i = (pageCurrent - 1) * page; i < pageCurrent * page && i < prodData.length; i++) {
-  //     newAllData.push(prodData[i]);
-  //   }
-  //   setAllProdData(newAllData);
-  // };
+  const renderChange = (pageCurrent) => {
+    for (let i = (pageCurrent - 1) * page; i < pageCurrent * page && i < prodData.length; i++) {
+      newAllData.push(prodData[i]);
+    }
+    setAllProdData(newAllData);
+  };
 
   return (
     <div className='c-activityBox'>
